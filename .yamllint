@@ -8,6 +8,9 @@ rules:
     max-spaces-inside: 1
     level: error
   line-length: disable
+
+ignore: |
+  .travis.yml
   # NOTE(retr0h): Templates no longer fail this lint rule.
   #               Uncomment if running old Molecule templates.
   # truthy: disable
