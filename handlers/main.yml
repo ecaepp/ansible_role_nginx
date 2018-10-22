@@ -1,0 +1,6 @@
+---
+- name: nginx_config_validate
+  command: nginx -t
+
+- name: reload_nginx
+  service: name=nginx state=restarted

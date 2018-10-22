@@ -1,0 +1,26 @@
+---
+- name: Include any var files defined in `vars`
+  include_vars:
+    dir: vars/nginx_conf_vars
+
+- name: Create nginx conf files from templates
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ config_owner }}"
+    group: "{{ config_group }}"
+    mode: "{{ config_mode }}"
+  notify: nginx_config_validate
+  with_items:
+    - { 'src': 'nginx.conf.j2', 'dest': '/etc/nginx/nginx.conf' }
+    - { 'src': 'general.conf.j2', 'dest': '/etc/nginx/conf.d/general.conf' }
+
+- name: Create vhost
+  template:
+    src: templates/server.conf.j2
+    dest: /etc/nginx/sites-available/{{ item.server_name }}.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload_nginx
+  with_items: "{{ vhost }}"

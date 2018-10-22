@@ -1,0 +1,22 @@
+---
+- name: Install dependencies
+  apt:
+    pkg: "{{ pkg_dependencies }}"
+    update_cache: true
+
+- name: Add Nginx GPG key
+  apt_key:
+    url: "{{ nginx_gpg_key_url }}"
+    state: present
+
+- name: Added Nginx offical repo
+  apt_repository:
+    repo: "{{ nginx_repo_url }} {{ansible_distribution_release }} nginx "
+    state: present
+    filename: nginx_repo
+
+- name: Install Nginx {{ nginx_version }}
+  apt:
+    name: nginx={{ nginx_version }}
+    state: present
+    update_cache: true

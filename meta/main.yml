@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: ecaepp
+  description: Working on Nginx role to build a deploy production ready apps. (This role is still in beta)
+  company: Huskurity
+
+  license: license (MIT)
+
+  min_ansible_version: 2.4
+  platforms:
+    - name: Ubuntu
+      versions:
+       - 16.04
+       - Xenial
+
+  galaxy_tags: 
+    - web
+    - nginx
+    - app
+    - system 
+
+dependencies: []

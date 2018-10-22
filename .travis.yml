@@ -1,0 +1,35 @@
+---
+language: python
+services: docker
+
+env:
+  global:
+    - ROLE_NAME: nginx
+    - TRAVIS_SECURE_ENV_VARS: true
+  matrix:
+    - MOLECULE_DISTRO: ubuntu1604
+    - MOLECULE_DOCKER_COMMAND: "/bin/systemd"
+
+before_script:
+  - cd ../
+  - mv ansible_role_$ROLE_NAME ecaepp.$ROLE_NAME
+  - cd ecaepp.$ROLE_NAME
+
+install:
+  - pip install molecule docker
+
+script: molecule test
+
+after_success:
+  deploy:
+    provider: releases
+    api_key:
+      secure: $GITHUB_API_TOKEN
+    file: nginx
+    on:
+      repo: ecaepp/ansible_role_$ROLE_NAME
+      branch: master
+      tags: true
+    
+  notifications:
+    webhooks: https://galaxy.ansible.com/api/v1/notifications/

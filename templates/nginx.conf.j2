@@ -1,0 +1,50 @@
+user {{ nginx_user }};
+pid {{ nginx_pid_file }};
+worker_processes {{ worker_processes}};
+worker_rlimit_nofile {{ worker_rlimit_nofile}};
+
+events {
+	multi_accept {{ event_multi_accept }};
+	worker_connections {{ worker_connections }};
+}
+
+http {
+	charset {{ charset }};
+	sendfile {{ sendfile }};
+	tcp_nopush {{ tcp_nopush }};
+	tcp_nodelay {{ tcp_nodelay }};
+	types_hash_max_size {{ types_hash_max_size }};
+	client_max_body_size {{ client_max_body_size }};
+
+	# MIME
+	include {{ include }};
+	default_type {{ default_type }};
+
+	# logging
+	access_log {{ access_log }};
+	error_log {{ error_log }};
+
+	# limits
+	limit_req_log_level {{ limit_req_log_level }};
+	limit_req_zone {{ limit_req_zone }};
+
+	# SSL
+	ssl_session_timeout {{ ssl_session_timeout }};
+	ssl_session_cache {{ ssl_session_cache }};
+	ssl_session_tickets {{ ssl_session_tickets }};
+
+	# modern configuration
+	ssl_protocols {{ ssl_protocols }};
+	ssl_ciphers {{ ssl_ciphers }};
+	ssl_prefer_server_ciphers {{ ssl_prefer_server_ciphers }};
+
+	# OCSP Stapling
+	ssl_stapling on;
+	ssl_stapling_verify on;
+	resolver 8.8.8.8 8.8.4.4 208.67.222.222 208.67.220.220 valid=60s;
+	resolver_timeout 2s;
+
+	# load configs
+	include {{ conf_files }};
+	include {{ sites_enabled }};
+}
