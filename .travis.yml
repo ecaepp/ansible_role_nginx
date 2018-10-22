@@ -30,6 +30,6 @@ after_success:
       repo: ecaepp/ansible_role_$ROLE_NAME
       branch: master
       tags: true
-    
+
   notifications:
     webhooks: https://galaxy.ansible.com/api/v1/notifications/

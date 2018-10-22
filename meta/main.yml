@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: ecaepp
-  description: Working on Nginx role to build a deploy production ready apps. (This role is still in beta)
+  description: Working on Nginx role to build a deploy production ready apps. (This role is still in alpha)
   company: Huskurity
 
   license: license (MIT)
@@ -13,10 +13,10 @@ galaxy_info:
        - 16.04
        - Xenial
 
-  galaxy_tags: 
+  galaxy_tags:
     - web
     - nginx
     - app
-    - system 
+    - system
 
 dependencies: []

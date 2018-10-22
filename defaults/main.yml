@@ -33,6 +33,7 @@ tcp_nopush: "on"
 tcp_nodelay: "on"
 types_hash_max_size: 2048
 client_max_body_size: 16M
+server_tokens: "off"
 
 # MIME
 include: mime.types
@@ -103,12 +104,12 @@ vhost:
     listen_port: 80
     root_dir: /var/www
     index_name: index.html
-    
+
     # ssl:
     #   cert_dir: /etc/nginx/ssl
     #   crt: '/etc/nginx/ssl/server.crt'
     #   key: '/etc/nginx/ssl/server.key'
-    
+
     # security_headers:
     #   transport_security: Strict-Transport-Security "max-age=15768000; includeSubdomains",
     #   xframe_options: X-Frame-Options SAMEORIGIN
