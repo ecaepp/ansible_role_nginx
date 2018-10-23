@@ -1,7 +1,7 @@
 ---
 - name: Include any var files defined in `vars`
   include_vars:
-    dir: vars/nginx_conf_vars
+    dir: vars/
 
 - name: Create nginx conf files from templates
   template:
