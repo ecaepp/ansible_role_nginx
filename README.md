@@ -52,6 +52,7 @@ This role uses the template `templates/server.conf.j2` to create virtualhost con
 
 First create a new `.yml` file in `vars` named after the application ex. `someapp.yml`
 Second copy the vars from the vhosts section in `defaults/main.yml` the file you created and then fill in the vars to configure the vhost.
+Any config not need can be remove. ex. The `fastcgi_php` configs can be deleted if they are not need as long proper YAML indentaion is maintained.
 
 Example vhosts file for some app:
 ```yaml
