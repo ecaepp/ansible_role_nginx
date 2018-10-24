@@ -15,14 +15,14 @@ config_owner: root
 config_group: root
 config_mode: 0644
 
-# nginx.conf begin
+# ## nginx.conf begin ##
 
 nginx_user: www-data
 worker_processes: auto
 nginx_pid_file: /var/run/nginx.pid
 worker_rlimit_nofile: 8192
 
-# events
+# Events
 event_multi_accept: "on"
 worker_connections: 4096
 
@@ -67,9 +67,9 @@ resolver_timeout: 2s
 conf_files: /etc/nginx/conf.d/*.con
 sites_enabled: /etc/nginx/sites-enabled/*
 
-# nginx.conf end
+# ## nginx.conf end ##
 
-# General.conf begin
+# ## General.conf begin ##
 
 # Security Headers
 header_options: |
@@ -99,25 +99,34 @@ gzip_proxied: any
 gzip_comp_level: 6
 gzip_types: 'text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml'
 
-vhost:
-  - server_name: test.com
-    listen_port: 80
-    root_dir: /var/www
-    index_name: index.html
+# ## General.conf end ##
 
-    # ssl:
-    #   cert_dir: /etc/nginx/ssl
-    #   crt: '/etc/nginx/ssl/server.crt'
-    #   key: '/etc/nginx/ssl/server.key'
+# ## Vhost Configs
 
-    # security_headers:
-    #   transport_security: Strict-Transport-Security "max-age=15768000; includeSubdomains",
-    #   xframe_options: X-Frame-Options SAMEORIGIN
+# Vhost: The following section below can be used to create conf files for deploying app on Nginx
+# Create a new YAML file in the `vars` directory named after the application being deployed ex. `someapp.com.yml`
+# Copy the YAML configs below to the file that was created starting with `vhost:` 
+# Uncomment everything and remove any configs that are not need being careful to maintain proper indentaion for YAML.
 
-    try_files: '$uri $uri/ /index.php'
+# vhost:
+#   - server_name: test.com
+#     listen_port: 80
+#     root_dir: /var/www
+#     index_name: index.html
 
-    # fastcgi_php:
-    #   fastcgi_split_path_info: fastcgi_split_path_info ^(.+\.php)(/.+)$
-    #   fastcgi_pass: 'fastcgi_pass unix:/var/run/php7.0-fpm.sock'
-    #   fastcgi_index: fastcgi_index index.php,
-    #   include_fastcgi: include fastcgi.conf
+#     ssl:
+#       cert_dir: /etc/nginx/ssl
+#       crt: '/etc/nginx/ssl/server.crt'
+#       key: '/etc/nginx/ssl/server.key'
+
+#     security_headers:
+#       transport_security: Strict-Transport-Security "max-age=15768000; includeSubdomains",
+#       xframe_options: X-Frame-Options SAMEORIGIN
+
+#     try_files: '$uri $uri/ /index.php'
+
+#     fastcgi_php:
+#       fastcgi_split_path_info: fastcgi_split_path_info ^(.+\.php)(/.+)$
+#       fastcgi_pass: 'fastcgi_pass unix:/var/run/php7.0-fpm.sock'
+#       fastcgi_index: fastcgi_index index.php,
+#       include_fastcgi: include fastcgi.conf
