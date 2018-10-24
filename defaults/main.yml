@@ -105,7 +105,7 @@ gzip_types: 'text/plain text/css text/xml application/json application/javascrip
 
 # Vhost: The following section below can be used to create conf files for deploying app on Nginx
 # Create a new YAML file in the `vars` directory named after the application being deployed ex. `someapp.com.yml`
-# Copy the YAML configs below to the file that was created starting with `vhost:` 
+# Copy the YAML configs below to the file that was created starting with `vhost:`
 # Uncomment everything and remove any configs that are not need being careful to maintain proper indentaion for YAML.
 
 # vhost:
