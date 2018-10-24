@@ -24,3 +24,4 @@
     mode: 0644
   notify: reload_nginx
   with_items: "{{ vhost }}"
+  when: 'vhost is defined and vhost != None'
