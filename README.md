@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ecaepp/ansible_role_nginx.svg?branch=master)](https://travis-ci.org/ecaepp/ansible_role_nginx)
+
 ecaepp.nginx
 =========
 
