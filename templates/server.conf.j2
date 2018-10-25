@@ -1,21 +1,20 @@
 # Managed by Ansible
 
 server {
-    server_name {{item.server_name}};
-    listen {{ item.listen_port }};
-    #listen 443 ssl spdy;
+    server_name {{item.server_name}}; {# Required #}
+    listen {{ item.listen_port }}; {# Required #}
 
-    root {{ item.root_dir }}/{{ item.server_name }};
-    #root /opt/misp-server/misp/app/webroot;
-    index {{ item.index_name | default('index.html')}};
-    index index.php;
+    root {{ item.root_dir }}/{{ item.server_name }}; {# Required #}
+    index {{ item.index_name | default('index.html')}}; {# Required #}
 
+    {# Checks if `ssl` setting have been defined in the vhost file and configures them if they are #}
     # Configure Crypto Keys/Certificates/DH
     {% if item.ssl is defined and item.ssl != None%}}
     certificate         {{ item.ssl.cert_dir}}/{{ item.ssl.crt | default('server.crt')}};
     certificate_key     {{ item.ssl.cert_dir}}/{{ item.ssl.key | default('server.key')}};
     {% endif %}}
 
+    {# Checks if `security_headers` is set in vhost file and configures them if so #}
     {% if security_headers is defined and security_headrers != None %}}
     # enable HSTS
     add_header {{ item.security_headers.transport_security }};
@@ -25,6 +24,8 @@ server {
     location / {
         try_files {{ item.try_files }};
     }
+
+    {# Checks if `fastcgi is configured in the vhost file and configures them if so #}
     {% if fastcgi_php is defined and fastcgi_php != None %}}
     location ~ \.php$ {
         {{ item.fastcgi_php.fastcgi_split_path_info }};
