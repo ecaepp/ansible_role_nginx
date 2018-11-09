@@ -10,11 +10,6 @@ env:
     - MOLECULE_DISTRO: ubuntu1604
     - MOLECULE_DOCKER_COMMAND: "/bin/systemd"
 
-before_script:
-  - cd ../
-  - mv ansible_role_$ROLE_NAME ecaepp.$ROLE_NAME
-  - cd ecaepp.$ROLE_NAME
-
 install:
   - pip install molecule docker
 
