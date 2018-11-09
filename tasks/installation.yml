@@ -15,8 +15,8 @@
     state: present
     filename: nginx_repo
 
-- name: Install Nginx {{ nginx_version }}
+- name: Install Nginx
   apt:
-    name: nginx={{ nginx_version }}
+    name: nginx
     state: present
     update_cache: true
