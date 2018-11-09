@@ -1,1 +1,2 @@
 files/*
+molecule/default/tests/__pycache__
