@@ -25,7 +25,7 @@ scenario:
     - idempotence
     - side_effect
     - verify
-    # - destroy
+    - destroy
 verifier:
   name: testinfra
   lint:
