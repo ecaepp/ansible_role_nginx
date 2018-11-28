@@ -8,7 +8,6 @@ env:
     - TRAVIS_SECURE_ENV_VARS: true
   matrix:
     - MOLECULE_DISTRO: ubuntu1604
-    - MOLECULE_DOCKER_COMMAND: "/bin/systemd"
 
 install:
   - pip install molecule docker
@@ -23,7 +22,7 @@ after_success:
     file: nginx
     on:
       repo: ecaepp/ansible_role_$ROLE_NAME
-      branch: master
+      branch: dev
       tags: true
 
   notifications:
