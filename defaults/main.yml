@@ -108,7 +108,7 @@ gzip_types: 'text/plain text/css text/xml application/json application/javascrip
 # Copy the YAML configs below to the file that was created starting with `vhost:`
 # Uncomment everything and remove any configs that are not need being careful to maintain proper indentaion for YAML.
 
-# vhost:
+vhost: []
 #   - server_name: test.com
 #     listen_port: 80
 #     root_dir: /var/www
