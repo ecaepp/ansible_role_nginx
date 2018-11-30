@@ -9,29 +9,46 @@ server {
 
     {# Checks if `ssl` setting have been defined in the vhost file and configures them if they are #}
     # Configure Crypto Keys/Certificates/DH
-    {% if item.ssl is defined and item.ssl != None%}}
+    {% if item.ssl is defined and item.ssl != None%}
     certificate         {{ item.ssl.cert_dir}}/{{ item.ssl.crt | default('server.crt')}};
     certificate_key     {{ item.ssl.cert_dir}}/{{ item.ssl.key | default('server.key')}};
-    {% endif %}}
+    {% endif %}
 
     {# Checks if `security_headers` is set in vhost file and configures them if so #}
-    {% if security_headers is defined and security_headrers != None %}}
+    {% if security_headers is defined and security_headrers != None %}
     # enable HSTS
     add_header {{ item.security_headers.transport_security }};
     add_header {{ item.security_headers.xframe_options }};
-    {% endif %}}
+    {% endif %}
 
     location / {
         try_files {{ item.try_files }};
     }
 
+    # svg, fonts
+    location ~* \.(?:svgz?|ttf|ttc|otf|eot|woff2?)$ {
+	    add_header {{ fonts_headrer_options }};
+	    expires {{ fonts_expire }};
+	    access_log {{ fonts_access_log }};
+    }
+
+    # assets, media
+    location ~* \.(?:css(\.map)?|js(\.map)?|jpe?g|png|gif|ico|cur|heic|webp|tiff?|mp3|m4a|aac|ogg|midi?|wav|mp4|mov|webm|mpe?g|avi|ogv|flv|wmv)$ {
+	    expires {{ media_expires }};
+	    access_log {{ media_access_log }};
+    }
+
+    location ~ /\. {
+	    {{ dot_file_location }};
+    }
+
     {# Checks if `fastcgi is configured in the vhost file and configures them if so #}
-    {% if fastcgi_php is defined and fastcgi_php != None %}}
+    {% if fastcgi_php is defined and fastcgi_php != None %}
     location ~ \.php$ {
         {{ item.fastcgi_php.fastcgi_split_path_info }};
         {{ item.fastcgi_php.fastcgi_pass }};
         {{ item.fastcgi_php.fastcgi_index }};
         {{ item.fastcgi_php.include_fastcgi }};
     }
-    {% endif %}}
+    {% endif %}
 }

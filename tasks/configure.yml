@@ -18,7 +18,7 @@
 - name: Create vhost
   template:
     src: templates/server.conf.j2
-    dest: /etc/nginx/sites-available/{{ item.server_name }}.conf
+    dest: /etc/nginx/conf.d/{{ item.server_name }}.conf
     owner: root
     group: root
     mode: 0644
