@@ -1,25 +1,8 @@
-# Managed by Ansible
-
-# security headers
+# # Managed by Ansible
+# 
+# # security headers
 {{ header_options }}
-
-# . files
-location ~ /\. {
-	{{ dot_file_location }};
-}
-
-# assets, media
-location ~* \.(?:css(\.map)?|js(\.map)?|jpe?g|png|gif|ico|cur|heic|webp|tiff?|mp3|m4a|aac|ogg|midi?|wav|mp4|mov|webm|mpe?g|avi|ogv|flv|wmv)$ {
-	expires {{ media_expires }};
-	access_log {{ media_access_log }};
-}
-
-# svg, fonts
-location ~* \.(?:svgz?|ttf|ttc|otf|eot|woff2?)$ {
-	add_header {{ fonts_headrer_options }};
-	expires {{ fonts_expire }};
-	access_log {{ fonts_access_log }};
-}
+# 
 
 # gzip
 gzip {{ gzip_status }};
