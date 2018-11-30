@@ -64,7 +64,7 @@ resolver: 8.8.8.8 8.8.4.4 208.67.222.222 208.67.220.220 valid=60s
 resolver_timeout: 2s
 
 # Load Configs
-conf_files: /etc/nginx/conf.d/*.con
+conf_files: /etc/nginx/conf.d/*.conf
 sites_enabled: /etc/nginx/sites-enabled/*
 
 # ## nginx.conf end ##
@@ -73,7 +73,7 @@ sites_enabled: /etc/nginx/sites-enabled/*
 
 # Security Headers
 header_options: |
-  add_header X-Frame-Options "SAMEORIGIN" alway;
+  add_header X-Frame-Options "SAMEORIGIN" always;
   add_header X-XSS-Protection "1; mode=block" always;
   add_header X-Content-Type-Options "nosniff" always;
   add_header Referrer-Policy "no-referrer-when-downgrade" always;
