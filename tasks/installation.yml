@@ -1,4 +1,14 @@
 ---
+- name: Install Python OpenSSL package
+  apt:
+    pkg: "{{ python2-pkgs }}"
+  when: ansible_python_version < '3'
+
+- name: Install Python OpenSSL package
+  apt:
+    pkg: "{{ python3-pkgs }}"
+  when: ansible_python_version > '3'
+
 - name: Install dependencies
   apt:
     pkg: "{{ pkg_dependencies }}"
