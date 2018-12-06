@@ -17,6 +17,12 @@ Role Variables
 
 Base role variables are defined in `default/main.yml` and is divied in to blocks base on the conf file or vhost configureation.
 
+The Role Options section is for configureing option for how the role function and which task to run.
+
+```yaml
+selfsigned_cert: false # Generate self signed SSL cert.
+```
+
 The role creates three config file at the moment `nginx.conf, general.conf, and a vhost conf`.
 
 Configs are defined in `defaults/main.yml so they can be easily overwritten elsewhere in the playbook. 

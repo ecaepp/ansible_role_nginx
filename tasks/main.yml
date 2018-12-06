@@ -4,3 +4,7 @@
 
 - name: Configure Nginx
   include_tasks: configure.yml
+
+- name: Generate Self-Signed SSL Certs
+  include_tasks: ssl_certs.yml
+  when: selfsigned_cert == true

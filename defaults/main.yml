@@ -1,9 +1,23 @@
 ---
+# Role Options
+selfsigned_cert: false # Generate self signed SSL cert.
+
 # Nginx install
 pkg_dependencies: [
   apt-transport-https,
-  ca-certificates
+  ca-certificates,
+  python3-openssl,
+  python-openssl
 ]
+
+ssl_certs:
+  - cert_dir: /etc/nginx/ssl/
+    crt_name: server.crt.pem
+    key_name: server.key.pem
+    csr_name: server.csr
+    provider: selfsigned
+    common_name: www.server.com
+
 
 # nginx_version: 1.10.3-0ubuntu0.16.04.2
 
