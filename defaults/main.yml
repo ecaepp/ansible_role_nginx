@@ -9,12 +9,11 @@ python3_pkgs:
 python2_pkgs:
   - python-openssl
 
-pkg_dependencies: [
-  apt-transport-https,
-  ca-certificates,
-  python3-openssl,
-  python-openssl
-]
+pkg_dependencies:
+  - apt-transport-https
+  - ca-certificates
+  - python3-openssl
+  - python-openssl
 
 ssl_certs:
   - cert_dir: /etc/nginx/ssl/
