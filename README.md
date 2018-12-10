@@ -1,19 +1,16 @@
 [![Build Status](https://travis-ci.org/ecaepp/ansible_role_nginx.svg?branch=master)](https://travis-ci.org/ecaepp/ansible_role_nginx)
 
-ecaepp.nginx
-=========
+## Nginx
 
 This role is being built to deploy an Nginx server on Ubuntu 16.04 that is configured and setup securly.
 
 This role is currently in alpha testing
 
-Requirements
-------------
+## Requirements
 
 Ansible 2.4
 
-Role Variables
---------------
+## Role Variables
 
 Base role variables are defined in `default/main.yml` and is divied in to blocks base on the conf file or vhost configureation.
 
@@ -30,6 +27,7 @@ Configs are defined in `defaults/main.yml so they can be easily overwritten else
 Example of modifing Nginx configureation:
 
 Lets take a look at the smaple configs found in `defaults/main.yml` that are found in the `nginx.conf` section.
+
 ```yaml
 # http
 charset: utf-8
@@ -50,12 +48,13 @@ The recommended way to change default value of varibles for `nginx.conf` and `ge
 types_hash_max_size: 1024
 server_tokens: "on"
 ```
+
 ```text
 Note: Configuring variable like this allows for easy versioning of custom vars in your own repo/vc system.
 ```
 
-VHosts
-------
+## VHosts
+
 This role uses the template `templates/server.conf.j2` to create virtualhost conf files for applications.
 
 First create a new `.yml` file in `vars` named after the application ex. `someapp.yml`
@@ -63,6 +62,7 @@ Second copy the vars from the vhosts section in `defaults/main.yml` the file you
 Any config not need can be remove. ex. The `fastcgi_php` configs can be deleted if they are not need as long proper YAML indentaion is maintained.
 
 Example vhosts file for some app:
+
 ```yaml
 vhost:
   - server_name: someapp.com
@@ -87,23 +87,22 @@ vhost:
     #   fastcgi_index: fastcgi_index index.php,
     #   include_fastcgi: include fastcgi.conf
 ```
+
 The SSL configs can be uncommented and set to the location of any certificates that have been uploaded or generated for the application to enable HTTPS.
 
 The `security_headers` are set globally in `general.conf` and can be modified here.
 
 `Fastcgi_php` can be uncommented for php apps that utilize fastcgi. Please note that this role currently only supports `php7.0-fpm`.
 
-Dependencies
-------------
+## Dependencies
 
 Currently there are no plans for this role to have any dependencies of other roles.
 
-Example Playbook
-----------------
+## Example Playbook
 
 Including an example of how to use your role (for instance, with variables
 passed in as parameters) is always nice for users too:
-    
+
     playbook.yml
 
     - hosts: servers
@@ -129,8 +128,6 @@ passed in as parameters) is always nice for users too:
 
         try_files: '$uri $uri/ /index.html'
 
-
-License
--------
+## License
 
 MIT
