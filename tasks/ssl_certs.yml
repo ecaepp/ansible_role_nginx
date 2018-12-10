@@ -1,0 +1,39 @@
+---
+- name: Ensure cert dir exists
+  file:
+    state: directory
+    path: "{{ item.cert_dir }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - "{{ ssl_certs }}"
+
+- name: private key
+  openssl_privatekey:
+    path: "{{ item.cert_dir }}/{{ item.key_name }}"
+    state: present
+    owner: root
+    group: root
+    mode: 0400
+    type: RSA
+    size: 4096
+  with_items:
+    - "{{ ssl_certs }}"
+
+- name: Generate CSR
+  openssl_csr:
+    path: "{{ item.cert_dir }}/{{ item.csr_name }}"
+    privatekey_path: "{{ item.cert_dir }}/{{ item.key_name }}"
+    common_name: "{{ item.common_name }}"
+  with_items:
+    - "{{ ssl_certs }}"
+
+- name: Generate Self-signed certs
+  openssl_certificate:
+    path: "{{ item.cert_dir }}/{{ item.crt_name }}"
+    privatekey_path: "{{ item.cert_dir }}/{{ item.key_name }}"
+    csr_path: "{{ item.cert_dir }}/{{ item.csr_name }}"
+    provider: "{{ item.provider }}"
+  with_items:
+    - "{{ ssl_certs }}"

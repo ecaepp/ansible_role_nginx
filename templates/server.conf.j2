@@ -1,17 +1,19 @@
 # Managed by Ansible
 
 server {
-    server_name {{item.server_name}}; {# Required #}
-    listen {{ item.listen_port }}; {# Required #}
+    server_name {{item.server_name}};
+    listen {{ item.listen_port }} ssl;
 
-    root {{ item.root_dir }}/{{ item.server_name }}; {# Required #}
-    index {{ item.index_name | default('index.html')}}; {# Required #}
+    root {{ item.root_dir }}/{{ item.server_name }};
+    index {{ item.index_name | default('index.html')}};
 
     {# Checks if `ssl` setting have been defined in the vhost file and configures them if they are #}
     # Configure Crypto Keys/Certificates/DH
-    {% if item.ssl is defined and item.ssl != None%}
-    ssl_certificate         {{ item.ssl.cert_dir}}/{{ item.ssl.crt | default('server.crt')}};
-    ssl_certificate_key     {{ item.ssl.cert_dir}}/{{ item.ssl.key | default('server.key')}};
+    {% if selfsigned_cert == true %}
+        {%- if item.ssl is defined and item.ssl != None -%}
+    ssl_certificate         {{ item.ssl.crt | default('{{ item.ssl.cert_dir}}/server.crt')}};
+    ssl_certificate_key     {{ item.ssl.key | default('item.ssl.cert_dir}}/server.key')}};
+        {%- endif %}
     {% endif %}
 
     {# Checks if `security_headers` is set in vhost file and configures them if so #}
