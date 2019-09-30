@@ -21,7 +21,7 @@
 
 - name: Added Nginx offical repo
   apt_repository:
-    repo: "{{ nginx_repo_url }} {{ansible_distribution_release }} nginx "
+    repo: "{{ nginx_repo_url }} {{ ansible_distribution_release }} nginx "
     state: present
     filename: nginx_repo
 
