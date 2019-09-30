@@ -8,8 +8,17 @@ lint:
 platforms:
   - name: instance
     image: ansible/ansible:ubuntu1604py3
+    published_ports:
+      - 8020:80
 provisioner:
   name: ansible
+  options:
+    vv: true
+    diff: true
+  config_options:
+    defaults:
+      stdout_callback: yaml
+      callback_whitelist: profile_roles, profile_tasks
   lint:
     name: ansible-lint
 scenario:
