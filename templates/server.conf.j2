@@ -11,8 +11,8 @@ server {
     # Configure Crypto Keys/Certificates/DH
     {% if selfsigned_cert == true %}
         {%- if item.ssl is defined and item.ssl != None -%}
-    ssl_certificate         {{ item.ssl.crt | default('{{ item.ssl.cert_dir}}/server.crt')}};
-    ssl_certificate_key     {{ item.ssl.key | default('item.ssl.cert_dir}}/server.key')}};
+    ssl_certificate         {{ item.ssl.crt | default('{{ item.ssl.cert_dir }}/server.crt')}};
+    ssl_certificate_key     {{ item.ssl.key | default('{{ item.ssl.cert_dir }}/server.key')}};
         {%- endif %}
     {% endif %}
 
