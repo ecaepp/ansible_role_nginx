@@ -6,7 +6,7 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: instance
+  - name: molecule_nginx
     image: ansible/ansible:ubuntu1604py3
     published_ports:
       - 8020:80
