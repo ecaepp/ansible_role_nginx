@@ -3,3 +3,9 @@
   hosts: all
   roles:
     - { role: ansible_role_nginx }
+  vars:
+    vhosts:
+      - server_name: test.com
+        listen_port: 80
+        root_dir: /var/www
+        index_name: index.html
