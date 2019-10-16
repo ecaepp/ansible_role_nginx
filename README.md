@@ -171,24 +171,24 @@ passed in as parameters) is always nice for users too:
       roles:
          - { role: ecaepp.nginx }
 
-      vars/someapp.yml
+      vars:
 
       vhost:
-        - server_name: test.com
-          listen_port: 80
-          root_dir: /var/www/someapp/app/webroot/
-          index_name: index.html
+          - server_name: test.com
+            listen_port: 80
+            root_dir: /var/www/someapp/app/webroot/
+            index_name: index.html
 
-          ssl:
-            cert_dir: /etc/nginx/ssl
-            crt: '/etc/nginx/ssl/someapp.com.crt'
-            key: '/etc/nginx/ssl/someapp.com.key'
+            ssl:
+              cert_dir: /etc/nginx/ssl
+              crt: '/etc/nginx/ssl/someapp.com.crt'
+              key: '/etc/nginx/ssl/someapp.com.key'
 
-          security_headers:
-            transport_security: Strict-Transport-Security "max-age=15768000;  includeSubdomains",
-            xframe_options: X-Frame-Options SAMEORIGIN
+            security_headers:
+              transport_security: Strict-Transport-Security "max-age=15768000;  includeSubdomains",
+              xframe_options: X-Frame-Options SAMEORIGIN
 
-          try_files: '$uri $uri/ /index.html'
+            try_files: '$uri $uri/ /index.html'
 
 ## License
 
