@@ -2,9 +2,7 @@
 
 ## Nginx
 
-This role is being built to deploy an Nginx server on Ubuntu 16.04 that is configured and setup securly.
-
-This role is currently in alpha testing
+This role is built to deploy Nginx on an Ubuntu 16.04.
 
 ## Requirements
 
